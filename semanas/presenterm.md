@@ -1,12 +1,12 @@
 ---
-title: ""
-sub_title: ""
-author: 
-options: 
+title: Template Presenterm
+sub_title: Exemplo de apresentação
+author: Bruno Rocha - LINUXtips
+options:
   implicit_slide_ends: true
   end_slide_shorthand: true
   incremental_lists: true
---- 
+---
 
 Title Slide
 ===
