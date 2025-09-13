@@ -236,7 +236,7 @@ JSON-RPC Moderno
 <!-- column: 0 -->
 
 
-```python +exec:uv +id:jsonrpc {4-5|7-20|23-28|31-50|1-52}
+```python +exec:uv +id:jj {4-5|7-20|23-28|31-50|1-52}
 /// # /// script
 /// # dependencies = [
 /// #     "jsonrpclib-pelix",
@@ -301,7 +301,7 @@ def run_client():
 
 <!-- column: 1 -->
 
-<!-- snippet_output: jsonrpc -->
+<!-- snippet_output: jj -->
 
 
 

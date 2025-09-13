@@ -135,7 +135,6 @@ analyze_logs(fake_log)
 <!-- alignment: center -->
 
 
-Simples, mas funciona! ✨
 
 
 
