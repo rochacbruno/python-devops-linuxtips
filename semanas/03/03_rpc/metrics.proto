@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package monitoring;
+
+// Mensagens
+message MetricRequest {
+    string hostname = 1;
+    string metric_type = 2;  // cpu, memory, disk
+}
+
+message MetricResponse {
+    string hostname = 1;
+    string metric_type = 2;
+    double value = 3;
+    int64 timestamp = 4;
+    string unit = 5;
+}
+
+message HealthRequest {
+    string service = 1;
+}
+
+message HealthResponse {
+    bool healthy = 1;
+    string message = 2;
+}
+
+// Serviço
+service MonitoringService {
+    rpc GetMetric(MetricRequest) returns (MetricResponse);
+    rpc StreamMetrics(MetricRequest) returns (stream MetricResponse);
+    rpc CheckHealth(HealthRequest) returns (HealthResponse);
+}
