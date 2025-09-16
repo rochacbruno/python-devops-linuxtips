@@ -1,0 +1,7 @@
+# Poetry com fonte privada
+# pyproject.toml
+
+[[tool.poetry.source]]
+name = "private"
+url = "https://private.repo.com/simple/"
+secondary = true
