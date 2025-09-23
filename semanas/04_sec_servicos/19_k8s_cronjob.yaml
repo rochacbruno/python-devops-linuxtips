@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: image-scan
+spec:
+  schedule: "0 2 * * *"  # Executa diariamente às 2h
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: image-scan
+            image: python:3.11-slim
+            command: ["python", "/scripts/scan.py"]
+            volumeMounts:
+            - name: script-volume
+              mountPath: /scripts
+          restartPolicy: OnFailure
+          volumes:
+          - name: script-volume
+            configMap:
+              name: image-scan-script
