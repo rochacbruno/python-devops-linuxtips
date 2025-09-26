@@ -1,0 +1,9 @@
+server {
+    server_name webhook.example.com.br;
+
+    location / {
+        proxy_pass http://unix:/run/gancho/gancho.sock;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
