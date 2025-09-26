@@ -92,3 +92,5 @@ dynaconf/vendor/source
 
 # pyenv
 .python-version
+
+notes.md
