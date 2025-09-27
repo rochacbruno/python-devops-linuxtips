@@ -1,0 +1,19 @@
+[Unit]
+Description=gancho daemon
+Requires=gancho.socket
+After=network.target
+
+[Service]
+User=gancho
+Group=www-data
+WorkingDirectory=/opt/gancho
+ExecStart=/opt/gancho/.venv/bin/gancho --uds /run/gancho/gancho.sock
+Restart=always
+RestartSec=5
+StandardInput=socket
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

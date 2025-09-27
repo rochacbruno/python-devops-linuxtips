@@ -1,0 +1,23 @@
+http://localhost:5000
+# https://webhook.cursodepython.com.br
+-s
+--
+
+--
+X-Github-Event: ping
+POST /
+
+--
+X-Github-Event: push
+POST /
+
+--
+X-Github-Event: create
+POST /
+{
+    "repository": {
+        "full_name": "my-username/my-repo"
+    },
+    "ref": "refs/heads/main",
+    "ref_type": "tag"
+}

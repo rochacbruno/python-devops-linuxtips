@@ -1,0 +1,11 @@
+[Unit]
+Description=Gancho Socket
+
+[Socket]
+ListenStream=/run/gancho/gancho.sock
+SocketMode=0660
+SocketUser=gancho
+SocketGroup=www-data
+
+[Install]
+WantedBy=sockets.target
