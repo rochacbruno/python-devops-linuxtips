@@ -1,9 +1,21 @@
-# Gancho takes websocket payload and perform actions
+# Gancho takes webhook payload and perform actions
 
 ## Usage:
 
-On github set websocket for the desired events,
-recommended [create, push, ping].
+On github set webhook for the desired events.
+
+## Events supported
+
+- create: execute a `deployment/{user}/{repo}/deploy.sh`
+- ping: returns "pong"
+
+## TODO
+
+- [ ] Challenge the secret passed by the webhook
+- [ ] Use a config file to declare events and target scripts
+- [ ] Rate limiting
+- [ ] Allow using a task queue producer instead of the Background thread
+- [ ] Add Ansible playbook to deploy gancho
 
 ## Installation
 
