@@ -1,0 +1,6 @@
+hostname|ip|status|uptime
+web-01|192.168.1.10|online|30d
+web-02|192.168.1.11|online|25d
+db-01|192.168.1.20|online|45d
+db-02|192.168.1.21|maintenance|2d
+cache-01|192.168.1.30|online|60d

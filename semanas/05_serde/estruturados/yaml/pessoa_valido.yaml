@@ -1,0 +1,41 @@
+# Configuração de pessoa (válido)
+nome: João Silva
+idade: 30
+ativo: true
+salario: 5000.50
+departamento: null
+
+skills:
+  - Python
+  - Docker
+  - Kubernetes
+
+endereco:
+  rua: Rua A
+  numero: 123
+  cidade: São Paulo
+  cep: "01000-000"  # String explícita
+
+projetos:
+  - nome: API Gateway
+    tecnologias:
+      - FastAPI
+      - Redis
+    inicio: 2024-01-15
+
+  - nome: CI/CD Pipeline
+    tecnologias:
+      - GitHub Actions
+      - Docker
+    inicio: 2024-06-01
+
+# Multi-line strings
+descricao: |
+  Esta é uma descrição
+  em múltiplas linhas
+  preservando quebras.
+
+resumo: >
+  Este texto será
+  juntado em uma
+  única linha.

@@ -1,0 +1,11 @@
+# ERRO: Indentação inconsistente
+database:
+  host: localhost
+  port: 5432
+   user: admin  # 3 espaços - ERRO!
+  password: secret
+
+application:
+  name: myapp
+ debug: true  # 1 espaço - ERRO!
+  timeout: 30

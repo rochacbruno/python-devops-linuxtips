@@ -1,0 +1,25 @@
+Python para DevOps - Exemplo UTF-8
+
+Este arquivo demonstra caracteres UTF-8:
+
+Português: Olá, como está? Ação, caminhão, São Paulo
+Espanhol: ¡Hola! ¿Cómo estás? Mañana, niño, español
+Francês: Bonjour! Ça va? Être, français, château
+Alemão: Guten Tag! Über, äußerst, Größe
+Russo: Привет! Как дела?
+Grego: Γειά σου! Καλημέρα
+Japonês: こんにちは 日本語
+Chinês: 你好 中文
+Árabe: مرحبا العربية
+Hebraico: שלום עברית
+
+Emojis: 🐍 Python 🚀 DevOps 💻 Code ✅ Success ❌ Error
+Símbolos: © ® ™ € £ ¥ § ¶ † ‡
+Matemática: ∞ √ ∑ ∏ ∫ ≈ ≠ ≤ ≥ ± × ÷
+Setas: → ← ↑ ↓ ⇒ ⇐ ⇑ ⇓
+
+Caracteres especiais para testes:
+- Acentos: á é í ó ú à è ì ò ù â ê î ô û ã õ ñ
+- Cedilha: ç Ç
+- Trema: ä ë ï ö ü
+- Til: ã õ ñ

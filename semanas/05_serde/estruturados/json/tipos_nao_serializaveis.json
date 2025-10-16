@@ -1,0 +1,11 @@
+{
+  "comment": "Este arquivo contém dados que serão usados com custom encoder",
+  "usuario": "admin",
+  "timestamp_iso": "2025-01-15T10:30:00.123456",
+  "data_criacao": "2025-01-15",
+  "valores_numericos": [1, 2, 3],
+  "config": {
+    "debug": true,
+    "timeout": 30
+  }
+}

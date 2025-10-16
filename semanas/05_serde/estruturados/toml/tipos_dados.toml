@@ -1,0 +1,96 @@
+# Demonstração de tipos de dados em TOML
+
+# Strings
+string_simples = "texto simples"
+string_com_quotes = 'aspas simples'
+string_multilinha = """
+Esta é uma string
+em múltiplas linhas
+preservando quebras."""
+
+string_multilinha_literal = '''
+C:\Users\nome\path
+Não precisa escapar \ em literal strings'''
+
+# Números
+inteiro = 42
+inteiro_positivo = +17
+inteiro_negativo = -5
+inteiro_grande = 1_000_000  # underscores permitidos
+
+float_simples = 3.14
+float_exponencial = 5e+22
+float_fracao = 6.626e-34
+infinito = inf
+infinito_negativo = -inf
+nao_numero = nan
+
+# Booleanos
+verdadeiro = true
+falso = false
+
+# Datas e horas
+data = 2025-01-15
+hora = 10:30:00
+data_hora = 2025-01-15T10:30:00
+data_hora_offset = 2025-01-15T10:30:00-03:00
+data_hora_z = 2025-01-15T10:30:00Z
+
+# Arrays
+array_inteiros = [1, 2, 3, 4, 5]
+array_strings = ["red", "yellow", "green"]
+array_misto_nao = [1, 2, "três"]  # ERRO em TOML! Arrays devem ser homogêneos
+
+array_aninhado = [
+    [1, 2],
+    [3, 4, 5]
+]
+
+array_multilinha = [
+    "item 1",
+    "item 2",
+    "item 3",
+]
+
+# Tables inline
+pessoa = { name = "João", age = 30, active = true }
+
+# Array of inline tables
+contributors = [
+    { name = "João", email = "joao@example.com" },
+    { name = "Maria", email = "maria@example.com" }
+]
+
+# Tables
+[servidor]
+ip = "192.168.1.1"
+porta = 8080
+
+# Nested tables (dotted keys)
+[servidor.ssl]
+habilitado = true
+certificado = "/path/to/cert"
+
+# Nested tables (explicit)
+[banco_dados]
+host = "localhost"
+
+[banco_dados.credenciais]
+usuario = "admin"
+senha = "secret"
+
+# Array of tables (lista de dicionários)
+[[produtos]]
+nome = "Produto A"
+preco = 99.99
+estoque = 100
+
+[[produtos]]
+nome = "Produto B"
+preco = 149.99
+estoque = 50
+
+[[produtos]]
+nome = "Produto C"
+preco = 199.99
+estoque = 25

@@ -1,0 +1,26 @@
+Python for DevOps - ASCII Example
+
+This file contains only ASCII characters (7-bit, 0-127).
+
+ASCII supports:
+- Basic English alphabet: a-z, A-Z
+- Numbers: 0-9
+- Common punctuation: . , ! ? ; : ' " - ( ) [ ] { }
+- Special symbols: @ # $ % ^ & * + = / \ | _ ~ `
+
+Basic text in English:
+Hello, World!
+Python is a great programming language.
+DevOps automation made easy.
+
+ASCII limitations:
+- No accents (a, e, i, o, u only)
+- No special characters from other languages
+- No emojis or symbols beyond basic set
+- No currency symbols except $
+
+This is perfect for:
+- Configuration files
+- Source code
+- Log files (English only)
+- Legacy system compatibility

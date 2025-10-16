@@ -1,0 +1,41 @@
+[project]
+name = "multi-tools"
+version = "0.1.0"
+description = "Exemplo de aplicação com múltiplos scripts executáveis"
+authors = [
+    {name = "Bruno Rocha", email = "bruno@linuxtips.io"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "argparse-color",
+    "rich",
+]
+
+# TODO: Adicionar dependências opcionais para desenvolvimento
+# [project.optional-dependencies]
+# dev = ["pytest", "black", "mypy"]
+
+# Múltiplos entry points para diferentes funcionalidades
+[project.scripts]
+file-info = "multi_tools.file_info:main"
+text-processor = "multi_tools.text_processor:main"
+system-monitor = "multi_tools.system_monitor:main"
+multi-tools = "multi_tools.cli:main"
+
+# TODO: Adicionar entry points para plugins
+# [project.entry-points."multi_tools.plugins"]
+# custom = "multi_tools.plugins.custom:CustomPlugin"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# TODO: Configurar dados de pacote para templates e configs
+# [tool.setuptools.package-data]
+# multi_tools = ["templates/*.txt", "configs/*.yaml"]

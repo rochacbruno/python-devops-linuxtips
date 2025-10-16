@@ -1,0 +1,7 @@
+chave:valor:tipo
+db_host:localhost:string
+db_port:5432:int
+db_name:production:string
+max_connections:100:int
+timeout:30:int
+debug_mode:false:bool

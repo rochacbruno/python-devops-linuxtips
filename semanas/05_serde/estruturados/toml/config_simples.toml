@@ -1,0 +1,36 @@
+# Configuração simples em TOML
+nome = "Meu Projeto"
+versao = "1.0.0"
+descricao = "Um projeto exemplo"
+
+# Arrays simples
+autores = ["João Silva", "Maria Santos"]
+keywords = ["python", "devops", "automation"]
+
+# Números
+timeout = 30
+retry_count = 3
+max_connections = 100
+price = 99.99
+
+# Booleanos
+debug = false
+enabled = true
+
+# Datas e horas (suporte nativo em TOML)
+data_criacao = 2025-01-15
+data_hora_completa = 2025-01-15T10:30:00Z
+
+# Table (dicionário)
+[owner]
+name = "João Silva"
+email = "joao@example.com"
+
+# Nested table
+[database.connection]
+host = "localhost"
+port = 5432
+
+[database.pool]
+min_size = 5
+max_size = 20

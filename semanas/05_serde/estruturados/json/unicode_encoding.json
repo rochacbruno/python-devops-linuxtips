@@ -1,0 +1,9 @@
+{
+  "nome": "José María González",
+  "cidade": "São Paulo",
+  "pais": "Brasil",
+  "descricao": "Desenvolvedor com experiência em sistemas distribuídos",
+  "caracteres_especiais": "àáâãäåçèéêëìíîïñòóôõöùúûü",
+  "emojis": "🐍 Python é ❤️",
+  "texto_multilinha": "Esta é uma string\ncom múltiplas linhas\ne caracteres especiais: ção, ñ, ü"
+}

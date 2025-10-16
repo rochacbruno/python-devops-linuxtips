@@ -1,0 +1,31 @@
+# Configuração usando âncoras e referências
+defaults: &defaults
+  timeout: 30
+  retry: 3
+  log_level: INFO
+
+# Configuração de produção
+producao:
+  <<: *defaults
+  host: prod.example.com
+  port: 443
+  ssl: true
+  workers: 4
+
+# Configuração de staging
+staging:
+  <<: *defaults
+  host: staging.example.com
+  port: 443
+  ssl: true
+  workers: 2
+
+# Configuração de desenvolvimento
+desenvolvimento:
+  <<: *defaults
+  host: localhost
+  port: 8000
+  ssl: false
+  workers: 1
+  timeout: 60  # override
+  log_level: DEBUG  # override

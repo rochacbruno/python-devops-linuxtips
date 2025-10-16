@@ -1,0 +1,21 @@
+Python para DevOps - Windows-1252 (CP1252)
+
+Este arquivo usa Windows-1252 (extensao do Latin-1).
+Comum em sistemas Windows antigos.
+
+Windows-1252 adiciona caracteres especiais ao Latin-1:
+- Aspas tipograficas: "" (aspas inglesas)
+- Travessoes: – — (curtos e longos)
+- Simbolo Euro: €
+- Bullet points: •
+- Elipse: …
+- Trademark: ™
+
+Portugues: Ola, acao, Sao Paulo
+Espanhol: Como? Manana
+Frances: Ca va tres bien
+
+Simbolos exclusivos Windows-1252:
+€ • … – — ™ ‰ † ‡
+
+NOTA: Diferente de Latin-1 nos bytes 128-159.

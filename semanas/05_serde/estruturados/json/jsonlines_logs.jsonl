@@ -1,0 +1,5 @@
+{"timestamp": "2025-01-15T10:30:00", "level": "INFO", "message": "Application started", "user": "admin"}
+{"timestamp": "2025-01-15T10:30:15", "level": "DEBUG", "message": "Processing request", "user": "user1", "request_id": "abc123"}
+{"timestamp": "2025-01-15T10:30:20", "level": "ERROR", "message": "Database connection failed", "error": "Connection timeout", "retry_count": 3}
+{"timestamp": "2025-01-15T10:30:25", "level": "WARNING", "message": "High memory usage", "memory_percent": 85.5}
+{"timestamp": "2025-01-15T10:30:30", "level": "INFO", "message": "Request completed", "duration_ms": 1234, "status_code": 200}

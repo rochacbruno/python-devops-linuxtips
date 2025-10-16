@@ -1,0 +1,10 @@
+Português: Olá, ação, São Paulo, caminhão
+Español: ¿Cómo estás? Mañana, señor
+Français: Ça va? Être, château
+Deutsch: Über, äußerst, Größe, ß
+
+Caracteres especiais:
+- Acentos: á é í ó ú à è ì ò ù â ê î ô û ã õ ñ
+- Cedilha: ç Ç
+- Trema: ä ë ï ö ü Ä Ë Ï Ö Ü
+- Símbolos: © ® § ¶ ± × ÷ £ ¥ ¢

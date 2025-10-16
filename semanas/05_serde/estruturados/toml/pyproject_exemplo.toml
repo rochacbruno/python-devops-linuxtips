@@ -1,0 +1,83 @@
+# Exemplo de pyproject.toml (formato padrão Python)
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "meu-projeto"
+version = "1.0.0"
+description = "Um projeto exemplo de DevOps"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "João Silva", email = "joao@example.com" },
+    { name = "Maria Santos", email = "maria@example.com" }
+]
+keywords = ["devops", "python", "automation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "fastapi>=0.117.0",
+    "uvicorn[standard]>=0.37.0",
+    "httpx>=0.28.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.0",
+    "mypy>=1.8.0",
+]
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.5.0",
+]
+
+[project.scripts]
+meu-cli = "meu_projeto.cli:main"
+deploy = "meu_projeto.deploy:run"
+
+[project.urls]
+Homepage = "https://github.com/usuario/meu-projeto"
+Documentation = "https://meu-projeto.readthedocs.io"
+Repository = "https://github.com/usuario/meu-projeto.git"
+Issues = "https://github.com/usuario/meu-projeto/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--verbose",
+    "--cov=src",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

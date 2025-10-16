@@ -1,0 +1,5 @@
+Python para DevOps - Arquivo CORROMPIDO
+
+InÃ­cio em UTF-8: OlÃ¡ ğŸ
+Meio em Latin-1: São Paulo, ação
+De volta ao UTF-8: ChinÃªs Ãrabe

@@ -1,0 +1,39 @@
+# YAML com problemas de inferência de tipos
+# Estes valores serão interpretados incorretamente sem aspas
+
+# Problema 1: CEP interpretado como subtração
+endereco1:
+  cep: 01000-000  # Será interpretado como 1000 - 0 = 1000
+
+# Solução: usar aspas
+endereco2:
+  cep: "01000-000"
+
+# Problema 2: Versões como float
+versao_problema: 1.0  # float
+versao_correta: "1.0"  # string
+
+# Problema 3: Booleanos especiais em YAML
+flags:
+  yes_value: yes  # true
+  no_value: no    # false
+  on_value: on    # true
+  off_value: off  # false
+  true_value: true
+  false_value: false
+
+# Problema 4: Null/None variants
+valores_null:
+  null1: null
+  null2: ~
+  null3:  # vazio também é null
+
+# Problema 5: Números em diferentes formatos
+numeros:
+  decimal: 123
+  octal: 0o123
+  hexadecimal: 0x123
+  float: 123.45
+  exponencial: 1.23e+2
+  infinito: .inf
+  nao_numero: .nan

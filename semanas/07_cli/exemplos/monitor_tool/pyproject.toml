@@ -1,0 +1,36 @@
+[project]
+name = "monitor-tool"
+version = "0.1.0"
+description = "Ferramenta de monitoramento de sistema - exemplo completo de CLI"
+authors = [
+    {name = "Bruno Rocha", email = "bruno@linuxtips.io"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "psutil>=5.9.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+]
+
+# TODO: Adicionar dependências opcionais para alertas
+# [project.optional-dependencies]
+# alerts = ["sendgrid", "slack-sdk"]
+# database = ["sqlalchemy", "sqlite3"]
+
+[project.scripts]
+monitor = "monitor_tool.cli:main"
+monitor-daemon = "monitor_tool.daemon:main"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+monitor_tool = ["templates/*.yaml", "configs/*.yaml"]

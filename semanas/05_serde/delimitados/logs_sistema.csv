@@ -1,0 +1,6 @@
+timestamp,nivel,servico,mensagem
+2025-10-04 10:30:15,INFO,api,Servidor iniciado
+2025-10-04 10:31:20,WARNING,database,Conexão lenta
+2025-10-04 10:32:05,ERROR,api,Timeout na requisição
+2025-10-04 10:33:10,INFO,cache,Cache limpo
+2025-10-04 10:34:25,ERROR,database,Falha na query

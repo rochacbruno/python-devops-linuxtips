@@ -1,0 +1,22 @@
+---
+# Documento 1 - Usuário João
+nome: João Silva
+idade: 30
+email: joao@example.com
+roles:
+  - admin
+  - developer
+---
+# Documento 2 - Usuário Maria
+nome: Maria Santos
+idade: 25
+email: maria@example.com
+roles:
+  - developer
+---
+# Documento 3 - Usuário Pedro
+nome: Pedro Oliveira
+idade: 35
+email: pedro@example.com
+roles:
+  - viewer

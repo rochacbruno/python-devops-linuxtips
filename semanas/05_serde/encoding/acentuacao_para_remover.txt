@@ -1,0 +1,50 @@
+Arquivo para Teste de Remoção de Acentuação
+
+Este arquivo contém diversos caracteres acentuados para demonstrar
+normalização e remoção de acentos usando unicodedata.
+
+PORTUGUÊS:
+São Paulo, ação, caminhão, coração, pé, pó, óculos
+Informação, função, operação, tradução, nação
+Açúcar, açougue, alçado, alçar
+Pão, não, mão, cão, então, órgão
+
+ESPANHOL:
+Mañana, señor, niño, español, año
+¿Cómo estás? ¡Qué bien!
+
+FRANCÊS:
+Être, français, château, naïve
+Garçon, façade, œuvre, cœur
+À bientôt, très bien, déjà vu
+
+ALEMÃO:
+Über, äußerst, Größe, Straße
+Müller, Zürich, schön, Köln
+
+ITALIANO:
+Città, perché, più, così, già
+Caffè, università, però
+
+NOMES PRÓPRIOS:
+José, João, André, Luís, Renée
+François, Günter, Ángel, Björk
+
+URLs E SLUGS (teste prático):
+São Paulo -> sao-paulo
+Ação e Reação -> acao-e-reacao
+Informação Técnica -> informacao-tecnica
+Padrão de Qualidade -> padrao-de-qualidade
+
+CASOS ESPECIAIS:
+Combinações: ãção, ções, õões
+Maiúsculas: ÁÉÍÓÚ ÀÈÌÒÙ ÂÊÎÔÛ ÃÕÑ
+Minúsculas: áéíóú àèìòù âêîôû ãõñ
+Trema: ä ë ï ö ü ÿ
+Cedilha: ç Ç
+
+Este arquivo é ideal para testar:
+1. unicodedata.normalize('NFKD', texto)
+2. Remoção de acentos para ASCII
+3. Criação de slugs para URLs
+4. Normalização de nomes para bancos de dados

@@ -1,0 +1,5 @@
+{
+  'nome': 'João',
+  "idade": 30,
+  "ativo": True
+}

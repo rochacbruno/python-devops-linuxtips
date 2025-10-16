@@ -1,0 +1,8 @@
+id,nome,descricao,preco
+1,Produto A,"Descrição do produto A
+com múltiplas linhas
+de texto",100.00
+2,Produto B,"Uma linha só",200.00
+3,Produto C,"Produto com características:
+- Feature 1
+- Feature 2",150.00
