@@ -21,7 +21,7 @@ build-backend = "uv_build"
 executor.type = "uv"
 
 [tool.poe.tasks]
-test = "pytest tests"
+test = "pytest tests -sv"
 doctest = "python -m doctest src/ft/*.py -v"
 lint = "ruff check src tests"
 format = "ruff format src tests"

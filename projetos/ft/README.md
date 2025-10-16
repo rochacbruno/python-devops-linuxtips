@@ -116,3 +116,4 @@ Dicas:
 - Use a lógica pré existente no src/ft/cli.py
 - Crie arquivos python dedicados para convert e detect e http request (aulas da semana 1)
 - Adicione docstrings nas funções, variáveis e módulos para o `uv run poe docs` conseguir gerar a doc completa.
+- Faça os testes passarem `uv run poe test`
