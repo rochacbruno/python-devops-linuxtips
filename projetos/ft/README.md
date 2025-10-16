@@ -2,6 +2,15 @@
 
 O Canivete Suiço para tratamento de arquivos.
 
+
+## Setup
+
+```
+uv sync --all-groups
+```
+
+## CLI
+
 ```console
 ➜ uv run ft
 usage: ft [-h] [--version] COMMAND ...
@@ -117,3 +126,18 @@ Dicas:
 - Crie arquivos python dedicados para convert e detect e http request (aulas da semana 1)
 - Adicione docstrings nas funções, variáveis e módulos para o `uv run poe docs` conseguir gerar a doc completa.
 - Faça os testes passarem `uv run poe test`
+
+
+## Tarefas de manutenção do projeto
+
+`uv run poe {task}`
+
+```
+Configured tasks:
+  test
+  doctest
+  lint
+  format
+  docs
+  serve-docs
+```
