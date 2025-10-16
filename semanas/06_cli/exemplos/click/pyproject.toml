@@ -1,0 +1,44 @@
+[project]
+name = "ft"
+version = "0.1.0"
+# dynamic = ["version"]  # TODO: uv_build
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Bruno Rocha", email = "rochacbruno@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.1.0",
+]
+
+[project.scripts]
+ft = "ft.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.8.22,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.poe]
+executor.type = "uv"
+
+[tool.poe.tasks]
+test = "pytest tests -sv"
+doctest = "python -m doctest src/ft/*.py -v"
+lint = "ruff check src tests"
+format = "ruff format src tests"
+docs = "pdoc --docformat markdown --docformat google src/ft -o docs"
+serve-docs = "pdoc --docformat markdown --docformat google src/ft"
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.37.0",
+]
+doc = [
+    "pdoc>=15.0.4",
+]
+test = [
+    "pytest>=8.4.2",
+    "ruff>=0.14.0",
+]
+
