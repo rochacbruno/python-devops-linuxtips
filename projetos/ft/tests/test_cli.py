@@ -1,22 +1,19 @@
-from unittest.mock import patch
+from click.testing import CliRunner
 from ft.cli import main
 
 
-def test_convert_command(capsys):
-    test_args = ["ft", "convert", "--from", "file.json", "--to", "file.yaml"]
+def test_convert_command():
+    runner = CliRunner()
+    result = runner.invoke(main, ["convert", "--from", "file.json", "--to", "file.yaml"])
 
-    with patch("sys.argv", test_args):
-        main()
-        captured = capsys.readouterr()
-
-    assert "Converting from file.json to file.yaml" in captured.out
+    assert result.exit_code == 0
+    assert "Converting from file.json to file.yaml" in result.output
 
 
-def test_detect_command(capsys):
-    test_args = ["ft", "detect", "file.json"]
+def test_detect_command():
+    runner = CliRunner()
+    result = runner.invoke(main, ["detect", "file.json"])
 
-    with patch("sys.argv", test_args):
-        main()
-        captured = capsys.readouterr()
+    assert result.exit_code == 0
+    assert "Detecting encoding of file.json" in result.output
 
-    assert "Detecting encoding of file.json" in captured.out
