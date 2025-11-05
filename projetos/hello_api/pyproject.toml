@@ -37,7 +37,7 @@ prepare = "playwright install"
 
 [tool.poe.tasks.test-web]
 shell = """
-if [ "${headed}" = "true" ]; then
+if [ "${headed}" = "True" ] || [ "${headed}" = "true" ] || [ "${headed}" = "1" ]; then
     pytest tests/web/ -v --browser ${browser} --headed
 else
     pytest tests/web/ -v --browser ${browser}
