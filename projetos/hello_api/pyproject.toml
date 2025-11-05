@@ -16,6 +16,8 @@ dev = [
     "pytest-cov>=6.0.0",
     "ruff>=0.9.1",
     "poethepoet>=0.31.1",
+    "playwright>=1.55.0",
+    "pytest-playwright>=0.7.1",
 ]
 
 [tool.poe]
@@ -24,11 +26,37 @@ executor.type = "uv"
 [tool.poe.tasks]
 test = "pytest tests/ -v"
 test-cov = "pytest tests/ -v --cov=. --cov-report=term-missing --cov-report=html"
+test-unit = "pytest tests/unit/ -v"
+test-api = "pytest tests/api/ -v"
 format = "ruff format ."
 lint = "ruff check ."
 lint-fix = "ruff check . --fix"
 check = ["format", "lint", "test"]
 api = "uv run uvicorn app:app --reload"
+prepare = "playwright install"
+
+[tool.poe.tasks.test-web]
+shell = """
+if [ "${headed}" = "true" ]; then
+    pytest tests/web/ -v --browser ${browser} --headed
+else
+    pytest tests/web/ -v --browser ${browser}
+fi
+"""
+help = "Run web tests with Playwright"
+
+[[tool.poe.tasks.test-web.args]]
+name = "browser"
+options = ["--browser"]
+help = "Browser to use for testing (chromium, firefox, webkit)"
+default = "chromium"
+
+[[tool.poe.tasks.test-web.args]]
+name = "headed"
+options = ["--headed"]
+help = "Run tests in headed mode (visible browser)"
+type = "boolean"
+default = false
 
 
 [tool.ruff]
