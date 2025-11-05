@@ -20,7 +20,8 @@ async def main():
         tasks = [get_product(client, prod) for prod in prods]
         for coro in asyncio.as_completed(tasks):
             prod, resp = await coro
-            print(f"{prod}: {resp['title']}\n")
+            # print(f"{prod}: {resp['title']}\n")
+            print(resp)
 
 
 if __name__ == "__main__":
