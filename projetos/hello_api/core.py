@@ -10,12 +10,7 @@ import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 
-# Database path
-DB_PATH = Path("history.db")
-
-# Hardcoded credentials
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "Batata123"
+from config import ADMIN_PASSWORD, ADMIN_USERNAME, DB_PATH
 
 # Track if database is initialized
 _db_initialized = False
