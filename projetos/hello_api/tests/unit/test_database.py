@@ -1,4 +1,4 @@
-"""Unit tests for database functions in app.py."""
+"""Unit tests for database functions in core.py."""
 
 import sqlite3
 import tempfile
@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from app import (
+from core import (
     ensure_db_initialized,
     get_db_connection,
     get_history,
@@ -88,8 +88,8 @@ def test_ensure_db_initialized_with_uninitialized_db(monkeypatch):
 
     try:
         # Reset the initialization flag
-        import app as app_module
-        monkeypatch.setattr(app_module, "_db_initialized", False)
+        import core as core_module
+        monkeypatch.setattr(core_module, "_db_initialized", False)
 
         # Call ensure_db_initialized
         ensure_db_initialized(test_db_path)

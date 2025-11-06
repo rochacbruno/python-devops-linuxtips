@@ -6,6 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app as app_module
+import core as core_module
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -20,19 +21,19 @@ def use_test_database(monkeypatch):
     with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as tmp_file:
         test_db_path = Path(tmp_file.name)
 
-    # Patch the DB_PATH in the app module BEFORE creating the client
-    monkeypatch.setattr(app_module, "DB_PATH", test_db_path)
+    # Patch the DB_PATH in the core module BEFORE creating the client
+    monkeypatch.setattr(core_module, "DB_PATH", test_db_path)
 
     # Reset the database initialization flag
-    monkeypatch.setattr(app_module, "_db_initialized", False)
+    monkeypatch.setattr(core_module, "_db_initialized", False)
 
     # Initialize the test database
-    app_module.init_db(test_db_path)
+    core_module.init_db(test_db_path)
 
     yield test_db_path
 
     # Reset the flag after the test
-    app_module._db_initialized = False
+    core_module._db_initialized = False
 
     # Cleanup: remove the test database file
     if test_db_path.exists():
@@ -63,7 +64,7 @@ def authenticated_client():
         TestClient: FastAPI test client with authentication headers
     """
     # Encode credentials
-    credentials = f"{app_module.ADMIN_USERNAME}:{app_module.ADMIN_PASSWORD}"
+    credentials = f"{core_module.ADMIN_USERNAME}:{core_module.ADMIN_PASSWORD}"
     encoded_credentials = base64.b64encode(credentials.encode()).decode()
 
     test_client = TestClient(app_module.app, raise_server_exceptions=False)

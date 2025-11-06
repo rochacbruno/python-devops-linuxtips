@@ -1,8 +1,8 @@
-"""Unit tests for the format_word function in app.py."""
+"""Unit tests for the format_word function in core.py."""
 
 import pytest
 
-from app import format_word
+from core import format_word
 
 
 def test_format_word_simple_lowercase():

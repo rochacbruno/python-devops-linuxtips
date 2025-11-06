@@ -1,10 +1,10 @@
-"""Unit tests for the verify_basic_auth function in app.py."""
+"""Unit tests for the verify_basic_auth function in core.py."""
 
 import base64
 
 import pytest
 
-from app import ADMIN_PASSWORD, ADMIN_USERNAME, verify_basic_auth
+from core import ADMIN_PASSWORD, ADMIN_USERNAME, verify_basic_auth
 
 
 def test_verify_basic_auth_with_valid_credentials():
