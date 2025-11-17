@@ -1,0 +1,10 @@
+pipelines:
+  - name: example
+    steps:
+      - parallel:
+        - name: first
+          commands:
+            - uv run poe test
+        - name: second
+          commands:
+            - uv run poe lint

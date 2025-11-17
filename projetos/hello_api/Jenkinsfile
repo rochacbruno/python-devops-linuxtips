@@ -1,0 +1,5 @@
+stage('Test') {
+    sh '''
+        uv run --python ${PYTHON_VERSION} --isolated pytest tests/unit tests/api
+    '''
+}

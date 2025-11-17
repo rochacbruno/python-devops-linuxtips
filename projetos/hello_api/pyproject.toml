@@ -1,0 +1,108 @@
+[project]
+name = "hello-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.121.0",
+    "uvicorn>=0.38.0",
+    "httpx>=0.28.1",
+    "python-jenkins>=1.8.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.9.1",
+    "poethepoet>=0.31.1",
+    "playwright>=1.55.0",
+    "pytest-playwright>=0.7.1",
+    "ty>=0.0.1a25",
+    "pytest-xdist>=3.8.0",
+]
+
+[tool.poe]
+executor.type = "uv"
+
+[tool.poe.tasks]
+test = "pytest tests/ -v"
+test-cov = "pytest tests/ -v --cov=. --cov-report=term-missing --cov-report=html"
+test-unit = "pytest tests/unit/ -v"
+test-api = "pytest tests/api/ -v"
+type-check = "ty check"
+format = "ruff format ."
+format-check = "ruff format . --check"
+lint = "ruff check ."
+lint-fix = "ruff check . --fix"
+api = "uv run uvicorn app:app --reload"
+prepare = "playwright install"
+build = "uv build"
+check = ["format-check", "type-check", "lint", "test-cov"]
+ci-cd = ["check", "build"]
+
+[tool.poe.tasks.test-web]
+shell = """
+if [ "${headed}" = "True" ] || [ "${headed}" = "true" ] || [ "${headed}" = "1" ]; then
+    pytest tests/web/ -v --browser ${browser} --headed
+else
+    pytest tests/web/ -v --browser ${browser}
+fi
+"""
+help = "Run web tests with Playwright"
+
+[[tool.poe.tasks.test-web.args]]
+name = "browser"
+options = ["--browser"]
+help = "Browser to use for testing (chromium, firefox, webkit)"
+default = "chromium"
+
+[[tool.poe.tasks.test-web.args]]
+name = "headed"
+options = ["--headed"]
+help = "Run tests in headed mode (visible browser)"
+type = "boolean"
+default = false
+
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --strict-markers"
+
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "tests/*",
+    ".venv/*",
+    "venv/*",
+    "jcli*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
