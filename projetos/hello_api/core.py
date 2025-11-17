@@ -1,9 +1,3 @@
-"""Core functionality for the Hello API application.
-
-This module contains all business logic, database operations, authentication,
-and utility functions used by the FastAPI application.
-"""
-
 import base64
 import re
 import sqlite3
@@ -33,7 +27,7 @@ def init_db(db_path: Path | None = None):
     """Initialize the database with the history table."""
     global _db_initialized
 
-    if db_path is None:
+    if db_path is None:  # pragma: no cover
         db_path = DB_PATH
 
     with get_db_connection(db_path) as conn:

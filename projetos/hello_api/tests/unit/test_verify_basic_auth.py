@@ -144,7 +144,7 @@ def test_verify_basic_auth_with_only_scheme():
 
 def test_verify_basic_auth_with_unicode_credentials():
     """Test verify_basic_auth handles unicode characters in credentials."""
-    credentials = f"user😀:pass🔑"
+    credentials = "user😀:pass🔑"
     encoded = base64.b64encode(credentials.encode()).decode()
     auth_header = f"Basic {encoded}"
 

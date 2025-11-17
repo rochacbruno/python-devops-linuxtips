@@ -1,10 +1,3 @@
-"""
-Web test configuration.
-
-This module provides a pytest fixture that ensures the FastAPI application
-is running before web tests execute.
-"""
-
 import socket
 import subprocess
 import time

@@ -1,9 +1,3 @@
-"""FastAPI application for Hello API.
-
-This module contains the FastAPI application instance and all HTTP endpoints.
-Business logic is in core.py.
-"""
-
 from pathlib import Path
 
 from fastapi import FastAPI, Header, HTTPException

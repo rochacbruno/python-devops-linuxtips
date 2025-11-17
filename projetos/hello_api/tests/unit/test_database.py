@@ -89,6 +89,7 @@ def test_ensure_db_initialized_with_uninitialized_db(monkeypatch):
     try:
         # Reset the initialization flag
         import core as core_module
+
         monkeypatch.setattr(core_module, "_db_initialized", False)
 
         # Call ensure_db_initialized

@@ -1,9 +1,6 @@
-"""
-Browser-based tests for the Hello API web interface using Playwright.
-"""
+import time
 
 from playwright.sync_api import Page, expect
-
 
 BASE_URL = "http://localhost:8000"
 

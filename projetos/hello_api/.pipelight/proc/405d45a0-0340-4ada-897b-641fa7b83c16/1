@@ -1,0 +1,14 @@
+F541 [*] f-string without any placeholders
+   --> tests/unit/test_verify_basic_auth.py:147:19
+    |
+145 | def test_verify_basic_auth_with_unicode_credentials():
+146 |     """Test verify_basic_auth handles unicode characters in credentials."""
+147 |     credentials = f"user😀:pass🔑"
+    |                   ^^^^^^^^^^^^^^^^
+148 |     encoded = base64.b64encode(credentials.encode()).decode()
+149 |     auth_header = f"Basic {encoded}"
+    |
+help: Remove extraneous `f` prefix
+
+Found 1 error.
+[*] 1 fixable with the `--fix` option.

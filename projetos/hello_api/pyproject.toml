@@ -8,6 +8,7 @@ dependencies = [
     "fastapi>=0.121.0",
     "uvicorn>=0.38.0",
     "httpx>=0.28.1",
+    "python-jenkins>=1.8.3",
 ]
 
 [dependency-groups]
@@ -18,6 +19,8 @@ dev = [
     "poethepoet>=0.31.1",
     "playwright>=1.55.0",
     "pytest-playwright>=0.7.1",
+    "ty>=0.0.1a25",
+    "pytest-xdist>=3.8.0",
 ]
 
 [tool.poe]
@@ -28,12 +31,16 @@ test = "pytest tests/ -v"
 test-cov = "pytest tests/ -v --cov=. --cov-report=term-missing --cov-report=html"
 test-unit = "pytest tests/unit/ -v"
 test-api = "pytest tests/api/ -v"
+type-check = "ty check"
 format = "ruff format ."
+format-check = "ruff format . --check"
 lint = "ruff check ."
 lint-fix = "ruff check . --fix"
-check = ["format", "lint", "test"]
 api = "uv run uvicorn app:app --reload"
 prepare = "playwright install"
+build = "uv build"
+check = ["format-check", "type-check", "lint", "test-cov"]
+ci-cd = ["check", "build"]
 
 [tool.poe.tasks.test-web]
 shell = """
@@ -88,6 +95,7 @@ omit = [
     "tests/*",
     ".venv/*",
     "venv/*",
+    "jcli*",
 ]
 
 [tool.coverage.report]
