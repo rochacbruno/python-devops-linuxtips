@@ -1,0 +1,67 @@
+---
+# CronJob para executar o scanner periodicamente
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: image-scanner-cronjob
+  namespace: default
+spec:
+  # Agenda: a cada 2 minutos (para fins de demonstração)
+  # Em produção, use algo como "0 */6 * * *" (a cada 6 horas)
+  schedule: "*/2 * * * *"
+
+  # Manter histórico dos últimos 3 jobs bem-sucedidos
+  successfulJobsHistoryLimit: 3
+
+  # Manter histórico dos últimos 3 jobs com falha
+  failedJobsHistoryLimit: 3
+
+  # Template do Job
+  jobTemplate:
+    spec:
+      # Não reintentar automaticamente se falhar
+      backoffLimit: 2
+
+      # Template do Pod
+      template:
+        metadata:
+          labels:
+            app: image-scanner
+        spec:
+          # ServiceAccount com permissões para ler pods
+          serviceAccountName: image-scanner
+
+          # Política de restart: nunca reiniciar se completar ou falhar
+          restartPolicy: Never
+
+          containers:
+            - name: scanner
+              # IMPORTANTE: Construa a imagem e faça push para um registry
+              # ou carregue no kind com: kind load docker-image image-scanner:latest
+              image: image-scanner:latest
+              imagePullPolicy: IfNotPresent
+
+              # Variáveis de ambiente
+              env:
+                - name: SCAN_NAMESPACE
+                  value: "default"
+
+              # Recursos (opcional mas recomendado)
+              resources:
+                requests:
+                  memory: "128Mi"
+                  cpu: "100m"
+                limits:
+                  memory: "256Mi"
+                  cpu: "200m"
+
+              # Volume para persistir alertas (opcional)
+              volumeMounts:
+                - name: alerts
+                  mountPath: /tmp
+
+          # Volume temporário para alertas
+          volumes:
+            - name: alerts
+              emptyDir: {}
+

@@ -1,0 +1,13 @@
+[Unit]
+Description=Scan disk space and alert if low
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/rochacbruno/Projects/python-devops-linuxtips/semanas/10_tasks/cron/scan.py
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
+

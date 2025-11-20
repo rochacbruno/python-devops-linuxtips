@@ -1,0 +1,21 @@
+
+
+[Unit]
+Description=Run disk space scan every 30 seconds
+Requires=scan-disk.service
+
+[Timer]
+# Executa 30 segundos após o boot
+OnBootSec=30s
+# Executa a cada 30 segundos após a última execução
+OnUnitActiveSec=30s
+; OnCalendar=*-*-* *:00:00/2:00
+# Garantir precisão
+AccuracySec=1s
+# Persistir o timer
+Persistent=true
+
+
+
+[Install]
+WantedBy=timers.target
