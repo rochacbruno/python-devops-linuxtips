@@ -1,0 +1,14 @@
+[Unit]
+Description=Docker Container Health Monitor Daemon
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -u /home/rochacbruno/Projects/python-devops-linuxtips/semanas/10_tasks/sched/scan.py
+Environment="SCAN_INTERVAL=10"
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

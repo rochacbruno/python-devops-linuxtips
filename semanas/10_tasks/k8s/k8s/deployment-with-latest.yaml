@@ -1,0 +1,76 @@
+---
+# Deployment de exemplo usando tag 'latest' (ANTI-PATTERN!)
+# Este deployment será detectado pelo scanner
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-latest
+  namespace: default
+  labels:
+    app: nginx-bad-example
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-bad-example
+  template:
+    metadata:
+      labels:
+        app: nginx-bad-example
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest  # ⚠️ BAD: usando 'latest'
+          ports:
+            - containerPort: 80
+
+---
+# Deployment de exemplo SEM tag (usa 'latest' implicitamente - também ruim!)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-no-tag
+  namespace: default
+  labels:
+    app: nginx-worse-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-worse-example
+  template:
+    metadata:
+      labels:
+        app: nginx-worse-example
+    spec:
+      containers:
+        - name: nginx
+          image: nginx  # ⚠️ WORSE: sem tag = 'latest' implícito
+          ports:
+            - containerPort: 80
+
+---
+# Deployment de exemplo com tag PINADA (GOOD PRACTICE!)
+# Este NÃO será detectado pelo scanner
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-pinned
+  namespace: default
+  labels:
+    app: nginx-good-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-good-example
+  template:
+    metadata:
+      labels:
+        app: nginx-good-example
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25.3  # ✓ GOOD: tag específica
+          ports:
+            - containerPort: 80

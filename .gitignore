@@ -94,3 +94,6 @@ dynaconf/vendor/source
 .python-version
 
 notes.md
+semanas/10_tasks/k8s/k8s/kind
+semanas/10_tasks/k8s/k8s/kubectl
+
