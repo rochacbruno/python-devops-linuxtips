@@ -12,10 +12,14 @@ Verifica se há pods usando imagens com tag 'latest'.
 Envia alerta caso encontre.
 """
 
+import smtplib
+from email.mime.text import MIMEText
+import json
+import urllib.request
 import os
 import sys
 from datetime import datetime
-from typing import List, Dict, Optional
+from typing import List
 
 try:
     from kubernetes import client, config
@@ -25,19 +29,30 @@ except ImportError:
     print("Instale com: pip install kubernetes")
     sys.exit(1)
 
+SMTP_SERVER = "mailhog.default.svc.cluster.local"
+SMTP_PORT = 1025
 
-import urllib.request
-import json
+
+def enviar_email(mensagem):
+    msg = MIMEText(mensagem)
+    msg["Subject"] = "Alerta: Imagens com tag latest"
+    msg["From"] = "admin@system.com"
+    msg["To"] = "support@system.com"
+
+    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as smtp:
+        # smtp.starttls()
+        # smtp.login(SMTP_USER, SMTP_PASS)
+        smtp.send_message(msg)
+
 
 def enviar_slack(mensagem, webhook_url):
     payload = {"text": mensagem}
-    data = json.dumps(payload).encode('utf-8')
+    data = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
-        webhook_url,
-        data=data,
-        headers={'Content-Type': 'application/json'}
+        webhook_url, data=data, headers={"Content-Type": "application/json"}
     )
     urllib.request.urlopen(req)
+
 
 def envia_alerta(mensagem: str, arquivo: str = "/tmp/alertas") -> None:
     """Envia alerta escrevendo em arquivo."""
@@ -46,7 +61,8 @@ def envia_alerta(mensagem: str, arquivo: str = "/tmp/alertas") -> None:
         #     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         #     alertas.write(f"[{timestamp}] {mensagem}\n")
         # print(f"🚨 ALERTA gravado: {mensagem}")
-        enviar_slack(mensagem=mensagem, webhook_url=os.getenv("SLACK_WEBHOOK_URL"))
+        # enviar_slack(mensagem=mensagem, webhook_url=os.getenv("SLACK_WEBHOOK_URL"))
+        enviar_email(mensagem=mensagem)
     except Exception as e:
         print(f"Erro ao gravar alerta: {e}")
 
@@ -73,10 +89,7 @@ def inicializar_kubernetes() -> client.CoreV1Api:
     return client.CoreV1Api()
 
 
-def obter_pods(
-    v1: client.CoreV1Api,
-    namespace: str = "default"
-) -> List[client.V1Pod]:
+def obter_pods(v1: client.CoreV1Api, namespace: str = "default") -> List[client.V1Pod]:
     """
     Obtém lista de pods em um namespace.
 
@@ -106,12 +119,12 @@ def verificar_imagem_latest(imagem: str) -> bool:
         True se usa 'latest' ou não tem tag
     """
     # Imagens sem tag explícita usam 'latest' por padrão
-    if ':' not in imagem:
+    if ":" not in imagem:
         return True
 
     # Verifica se tag é 'latest'
-    _, tag = imagem.rsplit(':', 1)
-    return tag.lower() == 'latest'
+    _, tag = imagem.rsplit(":", 1)
+    return tag.lower() == "latest"
 
 
 def scan(namespace: str = "default") -> None:
@@ -121,11 +134,11 @@ def scan(namespace: str = "default") -> None:
     Args:
         namespace: Namespace a ser escaneado
     """
-    print(f"\n{'='*70}")
-    print(f"Kubernetes Image Scanner")
+    print(f"\n{'=' * 70}")
+    print("Kubernetes Image Scanner")
     print(f"Namespace: {namespace}")
     print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     # Inicializa cliente Kubernetes
     v1 = inicializar_kubernetes()
@@ -161,15 +174,17 @@ def scan(namespace: str = "default") -> None:
                 print(f"  Status: {pod_status}")
 
                 if verificar_imagem_latest(image):
-                    print(f"  ⚠️  ALERTA: Usando tag 'latest'!")
-                    pods_com_latest.append({
-                        'pod': pod_name,
-                        'container': container_name,
-                        'image': image,
-                        'status': pod_status
-                    })
+                    print("  ⚠️  ALERTA: Usando tag 'latest'!")
+                    pods_com_latest.append(
+                        {
+                            "pod": pod_name,
+                            "container": container_name,
+                            "image": image,
+                            "status": pod_status,
+                        }
+                    )
                 else:
-                    print(f"  ✓ OK: Imagem pinada")
+                    print("  ✓ OK: Imagem pinada")
 
                 print()
 
@@ -185,25 +200,27 @@ def scan(namespace: str = "default") -> None:
                 print(f"  Imagem: {image}")
 
                 if verificar_imagem_latest(image):
-                    print(f"  ⚠️  ALERTA: Usando tag 'latest'!")
-                    pods_com_latest.append({
-                        'pod': pod_name,
-                        'container': f"{container_name} (init)",
-                        'image': image,
-                        'status': pod_status
-                    })
+                    print("  ⚠️  ALERTA: Usando tag 'latest'!")
+                    pods_com_latest.append(
+                        {
+                            "pod": pod_name,
+                            "container": f"{container_name} (init)",
+                            "image": image,
+                            "status": pod_status,
+                        }
+                    )
                 else:
-                    print(f"  ✓ OK: Imagem pinada")
+                    print("  ✓ OK: Imagem pinada")
 
                 print()
 
     # Resumo
-    print(f"{'='*70}")
-    print(f"RESUMO:")
+    print(f"{'=' * 70}")
+    print("RESUMO:")
     print(f"  Total de pods: {len(pods)}")
     print(f"  Total de containers: {total_containers}")
     print(f"  Containers com 'latest': {len(pods_com_latest)}")
-    print(f"{'='*70}\n")
+    print(f"{'=' * 70}\n")
 
     # Enviar alertas se houver problemas
     if pods_com_latest:
@@ -244,6 +261,7 @@ def main():
     except Exception as e:
         print(f"Erro durante o scan: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 

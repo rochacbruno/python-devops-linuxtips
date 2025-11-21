@@ -50,6 +50,9 @@ kubectl apply -f k8s/cronjob.yaml
 echo "   ✓ CronJob aplicado"
 echo ""
 
+# Aplicar Mailhog pod e service
+kubectl apply -f k8s/mailhog.yaml
+
 # Mostrar status
 echo "=============================================="
 echo "Deploy concluído!"
