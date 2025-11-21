@@ -45,6 +45,11 @@ spec:
               env:
                 - name: SCAN_NAMESPACE
                   value: "default"
+                - name: SLACK_WEBHOOK_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: slack-webhook
+                      key: SLACK_WEBHOOK_URL
 
               # Recursos (opcional mas recomendado)
               resources:

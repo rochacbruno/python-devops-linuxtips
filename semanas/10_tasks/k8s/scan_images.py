@@ -26,13 +26,27 @@ except ImportError:
     sys.exit(1)
 
 
+import urllib.request
+import json
+
+def enviar_slack(mensagem, webhook_url):
+    payload = {"text": mensagem}
+    data = json.dumps(payload).encode('utf-8')
+    req = urllib.request.Request(
+        webhook_url,
+        data=data,
+        headers={'Content-Type': 'application/json'}
+    )
+    urllib.request.urlopen(req)
+
 def envia_alerta(mensagem: str, arquivo: str = "/tmp/alertas") -> None:
     """Envia alerta escrevendo em arquivo."""
     try:
-        with open(arquivo, "a") as alertas:
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            alertas.write(f"[{timestamp}] {mensagem}\n")
-        print(f"🚨 ALERTA gravado: {mensagem}")
+        # with open(arquivo, "a") as alertas:
+        #     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        #     alertas.write(f"[{timestamp}] {mensagem}\n")
+        # print(f"🚨 ALERTA gravado: {mensagem}")
+        enviar_slack(mensagem=mensagem, webhook_url=os.getenv("SLACK_WEBHOOK_URL"))
     except Exception as e:
         print(f"Erro ao gravar alerta: {e}")
 
