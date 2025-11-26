@@ -1,0 +1,61 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "cdktf-docker",
+      "version": "0.21.0"
+    },
+    "outputs": {
+    }
+  },
+  "provider": {
+    "docker": [
+      {
+      }
+    ]
+  },
+  "resource": {
+    "docker_container": {
+      "nginx-container": {
+        "//": {
+          "metadata": {
+            "path": "cdktf-docker/nginx-container",
+            "uniqueId": "nginx-container"
+          }
+        },
+        "image": "${docker_image.nginx-image.image_id}",
+        "name": "my-nginx",
+        "ports": [
+          {
+            "external": 8082,
+            "internal": 80
+          }
+        ]
+      }
+    },
+    "docker_image": {
+      "nginx-image": {
+        "//": {
+          "metadata": {
+            "path": "cdktf-docker/nginx-image",
+            "uniqueId": "nginx-image"
+          }
+        },
+        "name": "nginx:latest"
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "/home/rochacbruno/Projects/python-devops-linuxtips/semanas/12_cloud_iac/terraform/terraform.cdktf-docker.tfstate"
+      }
+    },
+    "required_providers": {
+      "docker": {
+        "source": "kreuzwerker/docker",
+        "version": "3.6.2"
+      }
+    }
+  }
+}

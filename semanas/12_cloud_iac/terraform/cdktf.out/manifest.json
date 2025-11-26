@@ -1,0 +1,16 @@
+{
+  "stacks": {
+    "aws-infra": {
+      "annotations": [
+      ],
+      "constructPath": "aws-infra",
+      "dependencies": [
+      ],
+      "name": "aws-infra",
+      "stackMetadataPath": "stacks/aws-infra/metadata.json",
+      "synthesizedStackPath": "stacks/aws-infra/cdk.tf.json",
+      "workingDirectory": "stacks/aws-infra"
+    }
+  },
+  "version": "0.21.0"
+}
