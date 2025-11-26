@@ -1,0 +1,98 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "aws-infra",
+      "version": "0.21.0"
+    },
+    "outputs": {
+      "aws-infra": {
+        "bucket_name": "bucket_name",
+        "instance_ip": "instance_ip"
+      }
+    }
+  },
+  "output": {
+    "bucket_name": {
+      "value": "${aws_s3_bucket.my-bucket.bucket}"
+    },
+    "instance_ip": {
+      "value": "${aws_instance.web-server.public_ip}"
+    }
+  },
+  "provider": {
+    "aws": [
+      {
+        "access_key": "test",
+        "endpoints": [
+          {
+            "ec2": "http://localhost:4566",
+            "iam": "http://localhost:4566",
+            "s3": "http://s3.localhost.localstack.cloud:4566",
+            "sts": "http://localhost:4566"
+          }
+        ],
+        "region": "us-east-1",
+        "s3_use_path_style": true,
+        "secret_key": "test",
+        "skip_credentials_validation": true,
+        "skip_metadata_api_check": "true",
+        "skip_requesting_account_id": true
+      }
+    ]
+  },
+  "resource": {
+    "aws_instance": {
+      "web-server": {
+        "//": {
+          "metadata": {
+            "path": "aws-infra/web-server",
+            "uniqueId": "web-server"
+          }
+        },
+        "ami": "ami-ff0fea8310f3",
+        "instance_type": "m5.large",
+        "tags": {
+          "Name": "WebServer"
+        },
+        "timeouts": {
+          "create": "2m",
+          "delete": "2m",
+          "update": "2m"
+        }
+      }
+    },
+    "aws_s3_bucket": {
+      "my-bucket": {
+        "//": {
+          "metadata": {
+            "path": "aws-infra/my-bucket",
+            "uniqueId": "my-bucket"
+          }
+        },
+        "bucket": "my-cdktf-bucket-demo-123",
+        "tags": {
+          "Environment": "Dev"
+        },
+        "timeouts": {
+          "create": "1m",
+          "delete": "1m",
+          "update": "1m"
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "/home/rochacbruno/Projects/python-devops-linuxtips/semanas/12_cloud_iac/terraform/terraform.aws-infra.tfstate"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "6.22.1"
+      }
+    }
+  }
+}

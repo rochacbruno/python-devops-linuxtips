@@ -96,3 +96,7 @@ dynaconf/vendor/source
 notes.md
 semanas/10_tasks/k8s/kind
 semanas/10_tasks/k8s/kubectl
+
+.terraform
+*.tfstate
+*.tfstate.*
