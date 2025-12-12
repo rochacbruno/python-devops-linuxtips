@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ server_name }}</title>
+</head>
+<body>
+    <h1>Servidor: {{ inventory_hostname }}</h1>
+    <p>Porta: {{ http_port }}</p>
+    <p>Document Root: {{ document_root }}</p>
+    <p>Gerado em: {{ ansible_date_time.iso8601 }}</p>
+</body>
+</html>

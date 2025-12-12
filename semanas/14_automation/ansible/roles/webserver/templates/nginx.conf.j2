@@ -1,0 +1,13 @@
+server {
+    listen {{ http_port }};
+    server_name {{ server_name }};
+
+    root {{ document_root }};
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Configurado por Ansible em {{ ansible_date_time.iso8601 }}
+}

@@ -1,0 +1,5 @@
+user: rochacbruno
+sudo:
+  password: "123456"
+connect_kwargs:
+  password: "123456"

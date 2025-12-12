@@ -1,0 +1,9 @@
+---
+- name: Configurar servidores web
+  hosts: all
+  become: true
+
+  roles:
+    - role: webserver
+      vars:
+        http_port: 8080

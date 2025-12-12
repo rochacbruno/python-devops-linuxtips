@@ -1,0 +1,35 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/webserver
+- name: Instalar pacotes do Nginx
+  apt:
+    name: "{{ nginx_packages }}"
+    state: present
+    update_cache: yes
+
+- name: Criar diretório document root
+  file:
+    path: "{{ document_root }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: "0755"
+
+- name: Copiar configuração do Nginx
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+  notify: Reload Nginx
+
+- name: Copiar página index
+  template:
+    src: index.html.j2
+    dest: "{{ document_root }}/index.html"
+    owner: www-data
+    group: www-data
+
+- name: Garantir que Nginx está rodando
+  service:
+    name: nginx
+    state: started
+    enabled: yes

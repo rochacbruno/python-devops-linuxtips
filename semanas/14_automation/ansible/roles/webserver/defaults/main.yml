@@ -1,0 +1,6 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for roles/webserver
+http_port: 8080
+server_name: localhost
+document_root: /var/www/html

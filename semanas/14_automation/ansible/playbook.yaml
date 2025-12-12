@@ -1,0 +1,67 @@
+---
+- name: Configurar servidores web
+  hosts: all
+  become: true
+
+  vars:
+    app_name: "Minha App"
+    http_port: 8080
+
+  tasks:
+    - name: Atualizar cache do apt
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Instalar Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Configurar nginx para servir na porta {{ http_port}}
+      shell: |
+        echo "server {
+          listen {{ http_port }};
+          server_name localhost;
+          root /var/www/html;
+          index index.html;
+        }" > /etc/nginx/sites-available/default
+
+    - name: Iniciar e habilitar Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Copiar página HTML customizada
+      copy:
+        dest: /var/www/html/index.html
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>{{ app_name }}</title>
+          </head>
+          <body>
+              <h1>Bem-vindo ao {{ app_name }}!</h1>
+              <p>Servidor: {{ inventory_hostname }}</p>
+              <p>IP: {{ ansible_default_ipv4.address }}</p>
+          </body>
+          </html>
+      notify: Reiniciar Nginx
+
+    - name: Verificar se Nginx está respondendo
+      uri:
+        url: "http://localhost:{{ http_port }}"
+        status_code: 200
+      register: resultado
+
+    - name: Exibir status
+      debug:
+        msg: "Nginx está funcionando! Status: {{ resultado }}"
+
+  handlers:
+    - name: Reiniciar Nginx
+      service:
+        name: nginx
+        state: restarted
