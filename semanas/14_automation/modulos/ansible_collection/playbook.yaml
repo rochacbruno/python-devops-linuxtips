@@ -1,0 +1,52 @@
+---
+- name: Testar modulo hello_api
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  collections:
+    - rochacbruno.hello
+
+  vars:
+    api_url: "http://localhost:8000"
+    api_user: "admin"
+    api_pass: "Batata123"
+
+  tasks:
+    - name: Saudar o mundo
+      rochacbruno.hello.hello_api:
+        endpoint: hello
+        base_url: "{{ api_url }}"
+      register: resultado_hello
+
+    - name: Mostrar resultado
+      debug:
+        var: resultado_hello
+
+    - name: Saudar uma pessoa especifica
+      hello_api:
+        endpoint: hello
+        word: "Ansible"
+        base_url: "{{ api_url }}"
+      register: resultado_pessoa
+
+    - name: Mostrar saudacao personalizada
+      debug:
+        msg: "API respondeu: {{ resultado_pessoa.message }}"
+
+    - name: Obter historico de chamadas
+      hello_api:
+        endpoint: history
+        base_url: "{{ api_url }}"
+        username: "{{ api_user }}"
+        password: "{{ api_pass }}"
+      register: resultado_history
+
+    - name: Mostrar historico
+      debug:
+        var: resultado_history.history
+
+    - name: Falhar se API retornou erro
+      fail:
+        msg: "API retornou status {{ resultado_hello.status_code }}"
+      when: resultado_hello.status_code != 200
