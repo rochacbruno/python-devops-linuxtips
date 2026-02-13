@@ -1,61 +1,60 @@
 """This is CLI module for ft."""
 
-import argparse
+import click
 
 
+@click.group(
+    help="File Tool: Canivete suiço para tratar arquivos.",
+    epilog="""
+Exemplos de uso:\n
+  ft convert --from file.json --to file.yaml\n
+  ft convert --from https://remote/file.json --to file.yaml\n
+  ft convert --from file.yaml --to https://remote/post\n
+  ft convert --from file.yaml --to json (sdout)\n
+  echo STDIN | ft convert --from yaml --to json file.json\n
+  ft detect mysterious_file.txt
+    """,
+)
+@click.version_option(version="0.1.0", prog_name="ft")
 def main() -> None:
     """Main entry point for ft CLI
 
-    Args:
-      file: str
-
-    Returns:
-      None
-
     Raises:
-      FileNotFoundError Raised when file is not readable
+      FileNotFoundError: Raised when file is not readable
     """
-    parser = argparse.ArgumentParser(
-        description="File Tool: Canivete suiço para tratar arquivos.",
-        epilog="""
-Exemplos de uso:
-  %(prog)s convert --from file.json --to file.yaml
-  %(prog)s convert --from https://remote/file.json --to file.yaml
-  %(prog)s convert --from file.yaml --to https://remote/post
-  %(prog)s convert --from file.yaml --to json (sdout)
-  echo STDIN | %(prog)s convert --from yaml --to json file.json
-  %(prog)s detect mysterious_file.txt
-        """.strip(),
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    parser.add_argument("--version", action="version", version="ft 0.1.0")
+    pass
 
-    subparsers = parser.add_subparsers(
-        dest="command", help="Comandos disponíveis", metavar="COMMAND"
-    )
 
-    # convert command
-    convert_parser = subparsers.add_parser(
-        "convert",
-        help=("Convert file formats \nsupport JSON YAML ..."),
-        description="Convert file to target format",
-    )
-    convert_parser.add_argument(
-        "--from", required=True, help="Source file or format", dest="from_"
-    )
-    convert_parser.add_argument("--to", required=True, help="Target file or format")
+@main.command(help="Convert file formats\nsupport JSON YAML ...")
+@click.option(
+    "--from",
+    "from_",
+    required=True,
+    help="Source file or format",
+)
+@click.option(
+    "--to",
+    required=True,
+    help="Target file or format",
+)
+def convert(from_: str, to: str) -> None:
+    """Convert file to target format
 
-    # detect command
-    detect_parser = subparsers.add_parser("detect", help="Detect file encoding")
-    detect_parser.add_argument("file", help="File to detect encoding")
+    Args:
+        from_: Source file or format
+        to: Target file or format
+    """
+    click.echo(f"Converting from {from_} to {to}")
+    # TODO: Implement convert
 
-    args = parser.parse_args()
-    match args.command:
-        case "convert":
-            print(f"Converting from {args.from_} to {args.to}")
-            # TODO: Implement convert
-        case "detect":
-            print(f"Detecting encoding of {args.file}")
-            # TODO: Implement detect
-        case _:
-            parser.print_help()
+
+@main.command(help="Detect file encoding")
+@click.argument("file")
+def detect(file: str) -> None:
+    """Detect file encoding
+
+    Args:
+        file: File to detect encoding
+    """
+    click.echo(f"Detecting encoding of {file}")
+    # TODO: Implement detect

@@ -8,7 +8,9 @@ authors = [
     { name = "Bruno Rocha", email = "rochacbruno@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "click>=8.3.0",
+]
 
 [project.scripts]
 ft = "ft.cli:main"
